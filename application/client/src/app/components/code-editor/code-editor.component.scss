@@ -1,0 +1,29 @@
+.code-editor {
+    height: 500px;
+}
+
+.options {
+    width: 100%;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-quinary);
+    border-radius: 50px;
+    overflow: hidden;
+    margin: 10px 0 10px 0;
+}
+
+.option {
+    width: 50%;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.option.selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,40 @@
+<section class="status-display" [@collapseExpand]="isCollapsed ? 'collapsed' : 'expanded'">
+    <h2 (click)="toggleCollapse()">
+        <span>Statut des Robots</span>
+        <span>{{ isCollapsed ? '&#x2b;' : '&#x2212;' }}</span>
+    </h2>
+    <div class="robot-status">
+        <div class="robot" id="robot1">
+            <button class="robot-name" title="Identifier" (click)="identifyRobot(robot1.id)">{{ robot1.name }}</button>
+            <p>
+                <span>Statut:</span><span>{{ robot1.status }}</span>
+            </p>
+            <p>
+                <span>Batterie:</span><span>{{ robot1.battery }}%</span>
+            </p>
+            <p *ngIf="(robotPoses['/robot_1/pose'] && robotPoses['/robot_1/pose'][0]) || (robotPoses['/limo1/pose'] && robotPoses['/limo1/pose'][0])">
+                <span>Position: </span>
+                <span>
+                  ({{ (robotPoses['/robot_1/pose'] ? robotPoses['/robot_1/pose'][0].position.x : robotPoses['/limo1/pose'][0].position.x) }},
+                  {{ (robotPoses['/robot_1/pose'] ? robotPoses['/robot_1/pose'][0].position.y : robotPoses['/limo1/pose'][0].position.y) }})
+                </span>
+              </p>
+        </div>
+        <div class="robot" id="robot2">
+            <button class="robot-name" title="Identifier" (click)="identifyRobot(robot2.id)">{{ robot2.name }}</button>
+            <p>
+                <span>Statut:</span><span>{{ robot2.status }}</span>
+            </p>
+            <p>
+                <span>Batterie:</span><span>{{ robot2.battery }}%</span>
+            </p>
+            <p *ngIf="(robotPoses['/robot_2/pose'] && robotPoses['/robot_2/pose'][0]) || (robotPoses['/limo2/pose'] && robotPoses['/limo2/pose'][0])">
+                <span>Position: </span>
+                <span>
+                  ({{ (robotPoses['/robot_2/pose'] ? robotPoses['/robot_2/pose'][0].position.x : robotPoses['/limo2/pose'][0].position.x) }},
+                  {{ (robotPoses['/robot_2/pose'] ? robotPoses['/robot_2/pose'][0].position.y : robotPoses['/limo2/pose'][0].position.y) }})
+                </span>
+              </p>
+        </div>
+    </div>
+</section>

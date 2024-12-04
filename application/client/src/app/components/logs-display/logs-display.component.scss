@@ -1,0 +1,15 @@
+.logs {
+    .terminal {
+        color: var(--color-primary);
+        background-color: #000;
+        font-family: 'Courier New', Courier, monospace;
+        height: 400px;
+        overflow-y: auto;
+        padding: 5px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .terminal::-webkit-scrollbar {
+        display: none;
+    }
+}

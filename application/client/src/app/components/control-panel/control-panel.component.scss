@@ -1,0 +1,24 @@
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.controls button {
+    width: 16%;
+    background-color: var(--color-secondary);
+    border: none;
+    color: var(--color-text);
+    padding: 10px 0px;
+    border-radius: 5px;
+    border: 2px solid var(--color-background);
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+        background-color: var(--color-background);
+    }
+    &:disabled {
+        background-color: var(--color-background);
+        cursor: not-allowed;
+    }
+}

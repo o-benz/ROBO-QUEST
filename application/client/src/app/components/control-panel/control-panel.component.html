@@ -1,0 +1,25 @@
+<section class="control-panel" [@collapseExpand]="isCollapsed ? 'collapsed' : 'expanded'">
+    <h2 (click)="toggleCollapse()">
+        <span>Panneau de Commande</span>
+        <span>{{ isCollapsed ? '&#x2b;' : '&#x2212;' }}</span>
+    </h2>
+    <div class="controls">
+        <button id="start-mission" (click)="startMission()" [disabled]="isMissionActive()">Lancer la Mission</button>
+        <button id="stop-mission" (click)="stopMission()" [disabled]="!isMissionActive()">Arrêter la Mission</button>
+        <button id="return-home" (click)="returnHome()" [disabled]="!isMissionActive()">Retour à la Maison</button>
+        <button id="peer-to-peer" (click)="initiateP2P()" [disabled]="!isMissionActive()">P2P</button>
+        <button id="geofence" (click)="geofence()" [disabled]="!isMissionSim()">Zone de Sécurité</button>
+        <button id="update-software" (click)="updateSoftware()" [disabled]="!isCodeChanged()">Mettre à Jour</button>
+    </div>
+    <app-start-mission-popup
+        *ngIf="showPopup && !isCollapsed"
+        (startPhysicalMission)="onPhysicalMissionStart()"
+        (startSimulationMission)="onSimulationMissionStart()"
+        (cancelMission)="onCancel()"
+    ></app-start-mission-popup>
+    <app-geofence-popup
+        *ngIf="showGeoPopup && !isCollapsed"
+        (geofence)="handleGeofence($event)"
+        (cancelMission)="onCancel()"
+    ></app-geofence-popup>
+</section>

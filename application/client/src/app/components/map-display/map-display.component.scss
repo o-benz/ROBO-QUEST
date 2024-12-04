@@ -1,0 +1,18 @@
+.map {
+    #map-display {
+        color: var(--color-text);
+        height: 100%;
+        background-color: var(--color-background);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+    }
+}
+
+canvas {
+    image-rendering: pixelated;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}

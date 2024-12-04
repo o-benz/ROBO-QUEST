@@ -1,0 +1,24 @@
+{
+    "root": false,
+    "extends": [
+        "../.eslintrc.json"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@angular-eslint"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "project": ["tsconfig.json"],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ]
+        },
+        {
+            "files": ["*.html"],
+            "extends": ["plugin:@angular-eslint/template/recommended"]
+        }
+    ]
+}

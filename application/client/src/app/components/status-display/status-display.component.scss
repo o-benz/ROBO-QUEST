@@ -1,0 +1,43 @@
+.robot-status {
+    display: flex;
+    gap: 20px;
+
+    .robot {
+        width: 10%;
+        background-color: var(--color-background);
+        padding: 15px;
+        border-radius: 8px;
+        flex: 1;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .robot-name {
+            font-size: large;
+            margin-bottom: 5px;
+            cursor: pointer;
+            width: 100%;
+            background-color: var(--color-secondary);
+            border: none;
+            color: var(--color-text);
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid var(--color-text);
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                transform: scale(1.02);
+            }
+            &:active {
+                transform: scale(0.98);
+            }
+        }
+
+        p {
+            display: flex;
+            justify-content: space-between;
+            font-size: medium;
+        }
+    }
+}

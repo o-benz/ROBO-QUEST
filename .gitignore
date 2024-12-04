@@ -1,0 +1,20 @@
+#.vscode folder
+**/.vs/
+**/.vscode/
+
+application/package-lock.json
+.DS_Store
+
+# Code Coverage Folder
+**/coverage/
+
+# Node Modules
+**/node_modules/
+
+.idea/
+
+# Build
+embedded_ws/build
+embedded_ws/install
+embedded_ws/log
+dockerfiles/.env

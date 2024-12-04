@@ -1,0 +1,62 @@
+<div class="container">
+    <header>
+        <a href="/home">
+            <h1>Système d'Exploration Multi-Robot</h1>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="/logs">Historique des Logs</a></li>
+                <li><a (click)="toggleTheme()">Changer le Thème</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="logs">
+            <h2>
+                <span>Historique des Logs</span>
+                <span class="actions">
+                    <div class="sort-container">
+                        <label class="sort-label">Ordre:</label>
+                        <button (click)="toggleSortOrder()" class="sort-button">
+                            {{ isAscending ? 'Ascendant' : 'Descendant' }}
+                        </button>
+                    </div>
+                    <div class="sort-container">
+                        <label class="sort-label">Trier par:</label>
+                        <select class="dropdown" [(ngModel)]="sortOption" (change)="sort()">
+                            <option value="date">Date</option>
+                            <option value="duration">Durée</option>
+                            <option value="distance">Distance</option>
+                        </select>
+                    </div>
+                    <div class="sort-container">
+                        <label class="sort-label">Type:</label>
+                        <select class="dropdown" [(ngModel)]="selectedType" (change)="typeChange()">
+                            <option value="both">Tous</option>
+                            <option value="physical">Physique</option>
+                            <option value="simulation">Simulation</option>
+                        </select>
+                    </div>
+                </span>
+            </h2>
+            <div class="missions">
+                @for (mission of this.missions; track mission) {
+                    <div class="mission">
+                        <h3>Date: {{mission.id}}, Durée: {{mission.missionDuration}}, Type : {{mission.missionType}}, Distance Parcourue: {{mission.traveledDistance}}, Robots: {{mission.robots}}</h3>
+                        <app-logs-display [mission]="mission"></app-logs-display>
+                        <app-map-display [map]="mission.map[0]"></app-map-display>
+                    </div>
+                }
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h4 class="team-name">Équipe 107</h4>
+        <p>
+            <span>Ely Cheikh ABASS</span>, <span id="css-king">Omar BENZEKRI</span>, <span id="gazebo-king">Abdul-Wahab CHAARANI</span>,
+            <span>Thomas ROULEAU</span>, <span>Ivan SAMOYLENKO</span>, <span>Loïc NGUEMEGNE TEMENA</span>
+        </p>
+    </footer>
+</div>

@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+:root, [data='dark'], [data='light'] {
+    transition: all 0.3s ease-in-out;
+}
+
+:root {
+    --color-primary: #ea00ff;
+    --color-secondary: #b734db00;
+    --color-tertiary: #5e34db8c;
+    --color-quaternary: #5e34db;
+    --color-quinary: #a041cc;
+    --color-background: #1c0946e7;
+    --color-text: #cbcbcb;
+    --footer-text: #888;
+}
+
+[data='light'] {
+    --color-primary: #f8f9fa;
+    --color-secondary: #d1e7dd00;
+    --color-tertiary: #d7d7d7;
+    --color-quaternary: #d7d7d7;
+    --color-quinary: #949494;
+    --color-background: #ffffff;
+    --color-text: #212529;
+    --footer-text: #2d2d2d;
+}
+
+:root {
+--primary-color: #191034;
+--secondary-color: #424597;
+--tertiary-color: #1c1656;
+--quaternary-color: #393c7d;
+--background-color: #1c0946e7;
+--text-color: #cbcbcb;
+}
+
+[data='light'] {
+--primary-color: #dddddd;
+--secondary-color: #cdcdcd;
+--tertiary-color: #9a9a9a;
+--quaternary-color: #8a8a8a;
+--background-color: #b9b9b9;
+--text-color: #333333;
+}
+
+html,
+app-root,
+body {
+    width: -webkit-fill-available;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    background-color: var(--primary-color);
+    background-image: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--tertiary-color), var(--quaternary-color));
+    background-size: 300% 300%;
+    background-repeat: no-repeat;
+    animation: gradientAnimation 12s ease infinite;
+    color: var(--text-color);
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.control-panel, .status-display, .map, .logs {
+    color: var(--color-text);
+    background-color: var(--color-tertiary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body > app-root > app-main-page > div > main > app-code-editor > section > code-editor > div > div.cm-scroller {
+    &::-webkit-scrollbar {
+        display: none !important;
+    }
+}
+
+body > app-root > app-main-page > div > main > app-code-editor > section > code-editor > div > div.cm-panels.cm-panels-bottom {
+    display: none !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

@@ -1,0 +1,41 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base",
+        "prettier"
+    ],
+    "ignorePatterns": ["projects/**/*"],
+    "plugins": [
+        "prettier",
+        "@typescript-eslint"
+    ],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "project": ["tsconfig.json"],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "plugin:prettier/recommended",
+                "plugin:import/recommended",
+                "plugin:import/typescript",
+                "airbnb-typescript"
+            ]
+        }
+    ],
+    "settings": {
+        "import/parser": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
+        }
+    },
+    "env": {
+        "commonjs": true,
+        "node": true,
+        "mocha": true,
+        "jasmine": true,
+        "es6": true,
+        "browser": true
+    }
+}

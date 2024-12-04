@@ -1,0 +1,198 @@
+.container {
+    user-select: none;
+    font-family: Arial, sans-serif;
+    color: var(--color-text);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 8px;
+    background-color: var(--color-background);
+    padding: 20px;
+    color: var(--color-text);
+    a {
+        color: var(--color-text);
+        text-decoration: none;
+    }
+    h1 {
+        cursor: pointer;
+    }
+    nav {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+    nav ul {
+        justify-content: center;
+        list-style: none;
+        display: flex;
+        gap: 20px;
+
+        li a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: text-decoration 0.3s;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+            &:active {
+                text-decoration: underline;
+                color: white;
+            }
+        }
+    }
+}
+
+@media (max-width: 910px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        h1 {
+            font-size: 25px;
+        }
+    }
+
+    h2 {
+        flex-direction: column;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+footer {
+    user-select: none;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--footer-text);
+}
+
+.team-name {
+    margin-bottom: 5px;
+}
+
+span{
+    position: relative;
+}
+
+span:hover::before {
+    position: absolute;
+    opacity: 0;
+    animation: crownAppear 4s forwards;
+}
+
+#css-king:hover::before {
+    content: url('../../../assets/css-king.png');
+    left: -290px;
+    top: -475px;
+    transform: scale(0.3);
+}
+
+#gazebo-king:hover::before {
+    content: url('../../../assets/gazebo-king.png');
+    left: -55px;
+    top: -260px;
+    transform: scale(0.748);
+}
+
+@keyframes crownAppear {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.logs {
+    .terminal {
+        color: var(--color-primary);
+        background-color: #000;
+        font-family: 'Courier New', Courier, monospace;
+        height: 400px;
+        overflow-y: auto;
+        padding: 5px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        white-space: pre;
+    }
+    .terminal::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+h2 {
+    cursor: default;
+    align-items: center;
+}
+
+.missions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mission {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    margin: 0;
+}
+
+.dropdown {
+    padding: 10px 20px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dropdown option {
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+.sort-button {
+    padding: 10px 20px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sort-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sort-label {
+    font-style: italic;
+    font-size: 0.35em;
+}

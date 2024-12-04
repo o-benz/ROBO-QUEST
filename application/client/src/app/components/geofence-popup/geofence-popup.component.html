@@ -1,0 +1,34 @@
+<div class="popup-container" (click)="onCancel()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <h2>Définition de la Zone</h2>
+        <h4>Spécifiez une zone de sécurité (geofence) de forme rectangulaire dans la carte d’une aire minimale de 4m2.</h4>
+        <div class="robot">
+            <h3>Point situé en bas à gauche:</h3>
+            <div class="input">
+                <label for="x_min">x min:</label>
+                <input type="number" id="x_min" [(ngModel)]="x_min" />
+            </div>
+            <div class="input">
+                <label for="y_min">y min:</label>
+                <input type="number" id="y_min" [(ngModel)]="y_min" />
+            </div>
+        </div>
+
+        <div class="robot">
+            <h3>Point situé en haut à droite:</h3>
+            <div class="input">
+                <label for="x_max">x max:</label>
+                <input type="number" id="x_max" [(ngModel)]="x_max" />
+            </div>
+            <div class="input">
+                <label for="y_max">y max:</label>
+                <input type="number" id="y_max" [(ngModel)]="y_max" />
+            </div>
+        </div>
+
+        <div class="actions">
+            <button (click)="onGeofence()" class="launch-btn">Définir la Zone</button>
+            <button (click)="onCancel()" class="cancel-btn">Annuler</button>
+        </div>
+    </div>
+</div>

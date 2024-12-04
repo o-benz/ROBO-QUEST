@@ -1,0 +1,47 @@
+<div class="popup-container" (click)="onCancel()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+        <h2>Lancement de Mission</h2>
+        <div class="options">
+            <button class="option" [ngClass]="{ selected: selectedOption === 'simulation' }" (click)="selectedOption = 'simulation'">
+                Simulation
+            </button>
+            <button class="option" [ngClass]="{ selected: selectedOption === 'physical' }" (click)="selectedOption = 'physical'">Physique</button>
+        </div>
+        <div class="robot">
+            <h3>{{ robot1.name }}</h3>
+            <div class="input">
+                <label for="robot1X">X:</label>
+                <input type="number" id="robot1X" [(ngModel)]="robot1X" />
+            </div>
+            <div class="input">
+                <label for="robot1Y">Y:</label>
+                <input type="number" id="robot1Y" [(ngModel)]="robot1Y" />
+            </div>
+            <div class="input">
+                <label for="robot1Orientation">Orientation:</label>
+                <input type="number" id="robot1Orientation" [(ngModel)]="robot1Orientation" step="0.1" min="0" max="359.9" />
+            </div>
+        </div>
+
+        <div class="robot">
+            <h3>{{ robot2.name }}</h3>
+            <div class="input">
+                <label for="robot2X">X:</label>
+                <input type="number" id="robot2X" [(ngModel)]="robot2X" />
+            </div>
+            <div class="input">
+                <label for="robot2Y">Y:</label>
+                <input type="number" id="robot2Y" [(ngModel)]="robot2Y" />
+            </div>
+            <div class="input">
+                <label for="robot2Orientation">Orientation:</label>
+                <input type="number" id="robot2Orientation" [(ngModel)]="robot2Orientation" step="0.1" min="0" max="359.9" />
+            </div>
+        </div>
+
+        <div class="actions">
+            <button (click)="onStartMission()" class="launch-btn">Lancer la Mission</button>
+            <button (click)="onCancel()" class="cancel-btn">Annuler</button>
+        </div>
+    </div>
+</div>

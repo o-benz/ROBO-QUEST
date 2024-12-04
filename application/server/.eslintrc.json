@@ -1,0 +1,22 @@
+{
+    "root": true,
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false
+    },
+    "ignorePatterns": ["projects/**/*"],
+    "extends": ["../.eslintrc.json"],
+    "rules": {
+        "jsdoc/check-indentation": "off"
+    },
+    "globals": {
+        "NodeJS": true,
+        "Express": true,
+        "Mocha": true
+    },
+    "overrides": [],
+    "env": {
+        "node": true,
+        "jest": true
+    }
+}
