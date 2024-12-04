@@ -1,35 +1,158 @@
+# ROBO-QUEST: Multi-Robot Exploration System
 
-## Name
-This is the official readme for the ROBO-QUEST project
+![Project Banner](./doc/banner.png)
 
-## Description
-The purpose of this project is to develop a proof of concept for planetary exploration using a multi-robot system, equipped with the minimum sensors required by the Canadian Space Agency (CSA). This project, focused on research and education in space exploration, aims to demonstrate the effectiveness and viability of a simple autonomous multi-robot system in a controlled indoor environment simulating planetary exploration conditions. The robots can autonomously explore an unknown area, roughly the size of a room, using only the sensors specified by the CSA: an IMU ("Inertial Measurement Unit"), a 3D camera, an RGB camera, and a LiDAR ("Light Detection and Ranging"). The operator is able to monitor the data in real-time via a web interface, with limited control over starting and stopping the operations. The system will generate an accurate map of the explored area.
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Technologies and Architecture](#technologies-and-architecture)
+3. [Features](#features)
+   - [Command Board](#command-board)
+   - [Robot Status](#robot-status)
+   - [Code Editor](#code-editor)
+   - [Exploration Map](#exploration-map)
+   - [Debugging Logs](#debugging-logs)
+   - [Log History](#log-history)
+   - [Light and Dark Modes](#light-and-dark-modes)
+4. [Setup and Launch](#setup-and-launch)
+   - [Prerequisites](#prerequisites)
+   - [Setup Instructions](#setup-instructions)
+5. [Usage](#usage)
+6. [Contributors](#contributors)
+7. [License](#license)
 
-The project uses Docker to simplify the management of services, dependencies, and deployment. The three non-embedded services (Client: Angular front-end application, Server: NestJS back-end API, and Gazebo: simulation environment) are configured in the compose.yaml file for simultaneous launch. This approach centralizes the construction and startup of services, with the option to launch each service independently.
+---
 
-You can find the necessary information for installing Docker in their official documentation and the required modifications for granting the correct permissions in their post-installation steps documentation.
+## Project Overview
+**ROBO-QUEST** is a proof-of-concept project demonstrating a multi-robot exploration system capable of autonomously navigating and mapping unknown environments. Designed for research and educational purposes in space exploration, this system complies with the minimum sensor requirements of the Canadian Space Agency (CSA). The system enables real-time monitoring, control, and debugging through an interactive web interface.
 
-To start the system, execute the following command in the launch directory:
-```sh
-./start.sh
-```
-This command performs two actions: it retrieves the computer's IP address to allow network users to connect to the server launched in a Docker container and executes docker-compose to build the necessary containers for the client, server, and simulation. Once launched, the server is accessible at http://localhost:3000/ and the user interface at http://localhost:4200/. The Gazebo simulation starts at the same time, and an exploration is ready to be launched.
+Key features include:
+- Real-time mapping of the exploration zone.
+- Autonomous collaboration between robots via peer-to-peer (P2P) communication.
+- Advanced command and control functionalities for mission execution.
+- Persistent storage of exploration data using MongoDB for analysis and debugging.
+
+---
+
+## Technologies and Architecture
+The project integrates several advanced technologies:
+- **ROS (Robot Operating System)**: Manages robot control, communication, and sensor data processing.
+- **Embedded Python Code**: Executes controller logic and robot-specific functions.
+- **WebSockets**: Facilitates real-time bidirectional communication between the robots, server, and client.
+- **Frontend**: Angular-based web interface for user interaction and real-time monitoring.
+- **Backend**: NestJS API serving as the middleware between ROS nodes, MongoDB, and the client.
+- **MongoDB**: Persistent storage for mission data, logs, and exploration maps.
+- **Docker**: Simplifies deployment with containerized services for the frontend, backend, and simulation.
+
+---
+
+## Features
+
+### Command Board
+The command board is the control hub for mission management. It includes:
+- **Start Mission**: Initiates the exploration process.
+- **End Mission**: Halts the exploration.
+- **Return Home**: Commands the robots to return to their starting positions.
+- **P2P Communication**: Enables robots to share data and determine which is furthest from the ground station, displaying results on their respective screens.
+- **Set Geofence**: Defines the boundary within which robots must operate.
+- **Update Controller Code**: Allows real-time updates to the robots' Python-based control logic.
+
+![Command Board](./doc/command-board.png)
+
+---
+
+### Robot Status
+This component provides real-time status updates, including:
+- **Battery Level**: Displays the battery status of both robots.
+- **Robot Status**: Reports operational status and alerts.
+- **Identify Command**: Allows users to visually identify a specific robot in the field.
+
+![Robot Status](./doc/robot-status.png)
+
+---
+
+### Code Editor
+The code editor enables dynamic updates to the controller code, which can be applied to either the simulation or physical robots in real-time. This feature is essential for testing and deploying new exploration algorithms.
+
+![Code Editor](./doc/code-editor.png)
+
+---
+
+### Exploration Map
+The exploration map visualizes the environment in real-time, including:
+- **Generated Map**: Displays the layout of the explored area.
+- **Robot Positions**: Updates robot positions live as they navigate the environment.
+
+![Exploration Map](./doc/exploration-map.png)
+
+---
+
+### Debugging Logs
+This component logs every event and action during a mission, including:
+- Mission start and end times.
+- Command execution (e.g., Start Mission, Set Geofence).
+- Robot communication and status updates.
+Logs are automatically cleared at the start of a new mission.
+
+![Debugging Logs](./doc/debugging-logs.png)
+
+---
+
+### Log History
+The **Historique des Logs** page provides a detailed record of past missions, allowing for:
+- **Filtering and Sorting**: Search logs by attributes like mission duration, errors, or map size.
+- **Data Inspection**: View logs, maps, and mission metadata stored in MongoDB.
+
+![Log History](./doc/log-history.png)
+
+---
+
+### Light and Dark Modes
+The web interface supports both light and dark themes for enhanced user experience and accessibility.
+
+---
+
+## Setup and Launch
+
+### Prerequisites
+- Docker installed on your system.
+- MongoDB installed and configured.
+
+### Setup Instructions
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-repo/ROBO-QUEST.git
+   cd ROBO-QUEST
+   ```
+
+2. **Start Services**:
+   Run the following script to start the system:
+   ```bash
+   ./start.sh
+   ```
+
+3. **Access the Interface**:
+   - Server: [http://localhost:3000](http://localhost:3000)
+   - Client: [http://localhost:4200](http://localhost:4200)
+
+---
 
 ## Usage
-Before launching a mission, ensure that the robots are properly connected. If not, connect them by pressing "Robot 1" and "Robot 2" and verify that the simulation is started. Then, click the "Start Mission" button to begin exploration by selecting between simulation mode and physical mode. Use the "End Mission" button to stop the robots. You can access mission logs from the "Logs History" section in the header.
+1. **Launch the System**: Start the backend, client, and simulation environment using Docker.
+2. **Initiate a Mission**: Use the command board to start, control, and end missions.
+3. **Analyze Data**: Review real-time data on the exploration map and robot status components.
+4. **Inspect Logs**: Access mission logs and metadata via the debugging logs and log history pages.
 
-For additional information on usage read the DocumentationDuProjet-107-offre-CDR document
+---
 
-## Coding guidelines
-For Javascript and Typescript, the [Airbnb Standards](https://github.com/airbnb/javascript) have been used along with the [default prettier options](https://prettier.io/docs/en/options.html).
+## Contributors
+- **Ely Cheikh Abyss**
+- **Omar Benzekri**
+- **Abdul-Wahab Chaarani**
+- **Loïc Nguemegne**
+- **Thomas Rouleau**
+- **Ivan Samoylenko**
 
-For Python, the [Google coding guidlines](https://google.github.io/styleguide/pyguide.html) have been chosen.
+---
 
-The branch and commits naming best practices have been taken from
-[this blog](https://medium.com/@shinjithkanhangad/git-good-best-practices-for-branch-naming-and-commit-messages-a903b9f08d68).
-
-## Authors and acknowledgment
-Project Authors: Ely Cheikh Abyss, Omar Benzekri, Abdul-Wahab Chaarani, Loïc Nguemegne, Thomas Rouleau and Ivan Samoylenko
-
-
-
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.txt) file for details.
