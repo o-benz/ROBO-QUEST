@@ -1,0 +1,1 @@
+python3 get_backend_ip.py; docker compose up -d

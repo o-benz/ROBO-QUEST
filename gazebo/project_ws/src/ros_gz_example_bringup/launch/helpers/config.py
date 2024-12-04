@@ -1,0 +1,31 @@
+import math
+from .classes.core.pose import Pose
+
+# constants
+DEFAULT_POSITION = 0.0
+HORIZONTAL_YAW = math.pi / 2
+ATOMIC_GAP = 0.0001
+AVIARY_MAP_SIZE = 3
+AVIARY_WALL_SIZE = 0.175
+N_BOUNDARY_WALLS = 4
+ROBOT_SPAWN_HEIGHT = 0.1
+
+# size of the map
+MAP_WIDTH = 10
+MAP_HEIGHT = 10
+
+# obstacles
+N_WALL_OBSTACLES = 10
+MIN_WALL_LENGTH = 0.3
+
+# walls
+WALL_HEIGHT = 0.75
+WALL_THICKNESS = 0.1
+WALL_GAP = WALL_THICKNESS + ATOMIC_GAP
+
+# robots
+ROBOT_NAMES = ["limo1", "limo2"]
+# ROBOT_NAMES = ["pino"]
+
+ROBOT_STARTER_POSES = [Pose(y=0.0, z=ROBOT_SPAWN_HEIGHT), Pose(y=1.0, z=ROBOT_SPAWN_HEIGHT)]
+# ROBOT_STARTER_POSES = [Pose(y=0.0, z=ROBOT_SPAWN_HEIGHT)]

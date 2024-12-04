@@ -1,0 +1,36 @@
+services:
+  client:
+    build:
+      dockerfile: Dockerfile_client
+    container_name: client
+    ports:
+      - "4200:4200"
+    env_file:
+      - .env
+  server:
+    build:
+      dockerfile: Dockerfile_server
+    container_name: server
+    ports:
+      - "3000:3000"
+  gazebo:
+    build:
+      dockerfile: Dockerfile_gazebo
+    container_name: gazebo
+    devices:
+      - "/dev/dri:/dev/dri"
+    environment:
+      - DISPLAY=$DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.docker.xauth
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /tmp/.docker.xauth:/tmp/.docker.xauth
+    ports:
+      - "9090:9090"
+  database:
+    build:
+      dockerfile: Dockerfile_database
+    container_name: geppetto_cluster
+    ports:
+      - 27017:27017

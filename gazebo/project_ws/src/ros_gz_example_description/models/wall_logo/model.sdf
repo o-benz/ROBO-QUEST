@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+    <model name="wall_logo{index}">
+        <static>true</static>
+        <link name="link">
+            <collision name="collision">
+                <geometry>
+                    <mesh>
+                        <scale>{scale_x} {scale_y} 1</scale>
+                        <uri>package://ros_gz_example_description/models/wall_logo/meshes/wall_logo.stl</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <scale>{scale_x} {scale_y} 1</scale>
+                        <uri>package://ros_gz_example_description/models/wall_logo/meshes/wall_logo.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+        </link>
+    </model>
+</sdf>

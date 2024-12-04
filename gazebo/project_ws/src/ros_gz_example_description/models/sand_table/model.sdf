@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+    <model name="sand_table">
+        <static>true</static>
+        <link name="link">
+            <collision name="collision">
+                <geometry>
+                    <mesh>
+                        <uri>package://ros_gz_example_description/models/sand_table/meshes/sand_table.stl</uri>
+                        <scale>{scale_x} {scale_y} 1</scale>
+                    </mesh>
+                </geometry>
+            </collision>
+
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <uri>package://ros_gz_example_description/models/sand_table/meshes/sand_table.dae</uri>
+                        <scale>{scale_x} {scale_y} 1</scale>
+                    </mesh>
+                </geometry>
+            </visual>
+        </link>
+    </model>
+</sdf>

@@ -1,0 +1,29 @@
+# Dockerfile
+
+# Use Node.js to build the app
+FROM node:20 AS build
+
+WORKDIR /client
+
+# Clone the repository
+RUN git clone https://loic-hpp:glpat-v9Qt8vbw2zoY-stynsRH@gitlab.com/polytechnique-montr-al/inf3995/20243/equipe-107/geppetto.git\
+    && cd geppetto\
+    && git checkout develop\
+    && git pull
+
+WORKDIR /client/geppetto/application/client
+
+# Install Angular CLI
+RUN npm install -g @angular/cli
+
+# Install dependencies
+RUN npm ci
+
+# Install python3
+RUN apt update && apt install -y python3
+
+# Expose the port
+EXPOSE 4200
+
+# Start the app
+CMD python3 set_backend_ip.py && ng serve --host 0.0.0.0 --port 4200

@@ -1,0 +1,27 @@
+<sdf version='1.9'>
+    <model name="wall{index}">
+        <static>true</static>
+        <link name="link">
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>{size_x} {size_y} {size_z}</size>
+                    </box>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>{size_x} {size_y} {size_z}</size>
+                    </box>
+                </geometry>
+                <material>
+                    <ambient>0.5 0.5 0.5 1</ambient>
+                    <diffuse>0.8 0.8 0.8 1</diffuse>
+                    <specular>0.5 0.5 0.5 1</specular>
+                </material>
+            </visual>
+        </link>
+    </model>
+</sdf>
+  

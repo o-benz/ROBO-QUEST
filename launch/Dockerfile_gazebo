@@ -1,0 +1,76 @@
+FROM ubuntu:22.04
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV ROBOT=gazebo
+
+RUN echo "EN ATTENTE" > /tmp/.mission_status
+
+RUN apt update; apt upgrade -y
+# INSTALL UTILS
+RUN apt install lsb-release wget curl gnupg python3-pip git -y
+
+# OPENGL/MESA UTILS
+RUN apt install mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev -y
+
+
+# INSTALL IGNITION GAZEBO
+RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+
+RUN apt update; apt install ignition-fortress -y
+
+
+# INSTALL ROS2
+RUN apt install software-properties-common -y
+RUN pip3 install vcstool colcon-common-extensions
+RUN add-apt-repository universe
+
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+RUN apt update; apt install ros-humble-desktop -y
+
+RUN pip3 install rosdep
+
+RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
+RUN echo "export GZ_VERSION=fortress" >> /root/.bashrc
+
+# INSTALL NAV2 & SLAM 
+RUN apt install ros-humble-navigation2 -y
+RUN apt install ros-humble-nav2-bringup -y
+RUN apt install ros-humble-slam-toolbox
+
+# Workdir to /lib
+WORKDIR /lib
+
+# Clone the repository
+# TODO: Change the repository URL
+RUN git clone https://loic-hpp:glpat-v9Qt8vbw2zoY-stynsRH@gitlab.com/polytechnique-montr-al/inf3995/20243/equipe-107/geppetto.git\
+    && cd geppetto\
+    && git checkout develop\
+    && git pull
+
+WORKDIR /lib/geppetto/embedded_ws
+RUN /bin/bash -c "source /opt/ros/humble/setup.bash; pip uninstall em; pip uninstall empy -y; pip install empy; colcon build; source install/setup.bash"
+RUN echo "EN ATTENTE" > /tmp/.mission_status
+
+# Change workdir to the cloned repository directory
+# TODO: Change the path to the correct one
+WORKDIR /lib/geppetto/gazebo/project_ws
+
+# Initialize, update install and build rosdep
+RUN /bin/bash -c "source /opt/ros/humble/setup.bash && rosdep init && rosdep update\
+    && apt-get update -y\
+    && rosdep install --from-paths src --ignore-src -r -i -y\
+    && apt install -y ros-humble-rosbridge-server\
+    && colcon build --cmake-args -DBUILD_TESTING=ON"
+EXPOSE 9090
+# Command to run after launch or with docker compose
+# TODO: Change the launch file name
+CMD ["/bin/bash", "-c", "cd ../../embedded_ws; source /opt/ros/humble/setup.bash; pip uninstall em; pip uninstall empy -y; pip install empy; colcon build --packages-select common_msgs; cd ../gazebo/project_ws;\
+    source ../../embedded_ws/install/setup.bash && source /opt/ros/humble/setup.bash && source install/setup.bash && ros2 launch ros_gz_example_bringup diff_drive.launch.py\
+    & source /opt/ros/humble/setup.bash && source install/setup.bash && sleep 7 && ros2 launch ros_gz_example_bringup slam_toolbox.py\
+    & source /opt/ros/humble/setup.bash && source install/setup.bash && sleep 10 && ros2 launch ros_gz_example_bringup navigation.launch.py\
+    & source /opt/ros/humble/setup.bash && source install/setup.bash && sleep 10 && ros2 launch ros_gz_example_bringup navigation.launch2.py\
+    & source ../../embedded_ws/install/setup.bash && ros2 run rosbridge_server rosbridge_websocket\
+    "]

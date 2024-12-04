@@ -1,0 +1,15 @@
+# Dockerfile
+
+# Use the official MongoDB image from the Docker Hub
+FROM mongo:latest
+
+# Set environment variables (optional)
+ENV MONGO_INITDB_ROOT_USERNAME=geppetto
+ENV MONGO_INITDB_ROOT_PASSWORD=wC0CIfEZoqDHbbE
+ENV MONGO_INITDB_DATABASE=geppetto_bd
+
+# Expose the default MongoDB port
+EXPOSE 27017
+
+# Start MongoDB
+CMD ["mongod"]
