@@ -1,0 +1,3 @@
+string command
+MissionDetails mission_details
+string timestamp

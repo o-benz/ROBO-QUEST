@@ -1,0 +1,10 @@
+# Define a goal
+float64 initial_x
+float64 initial_y
+---
+# Define a result
+string status
+---
+# Define a feedback
+float64 current_x
+float64 current_y

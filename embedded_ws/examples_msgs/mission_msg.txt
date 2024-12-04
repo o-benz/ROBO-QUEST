@@ -1,0 +1,2 @@
+{command: 'StartMission', mission_details: {orientation: 1.57, position: {x: 
+ 10.0, y: 20.0}}, timestamp: '2024-09-13T12:34:56Z'}
