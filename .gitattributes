@@ -1,2 +1,16 @@
 * text=auto eol=lf
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+
+* text=auto eol=lf
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+
+# Ignore C++ files for language stats
+*.cpp linguist-vendored
+*.h linguist-vendored
+*.hpp linguist-vendored
+*.cxx linguist-vendored
+*.cc linguist-vendored
+
+# Ignore CMake files for language stats
+CMakeLists.txt linguist-vendored
+*.cmake linguist-vendored
